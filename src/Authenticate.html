@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+  <script src="js/angular-md5.min.js"></script>
+</head>
+<body>
+
+<div ng-app="ExampleApp">
+  <div ng-controller="ExampleController">
+    <h3>POST http://localhost:40001/json/Authenticate</h3>
+    <b>Request:</b>
+    <pre>{{authenticateRequest | json:4 }}</pre>
+    <b>Response:</b>
+    <pre>{{authenticateResponse | json:4 }}</pre>
+    <h3>POST http://localhost:40001/json/Logout</h3>
+    <b>Request:</b>
+    <pre>{{logoutRequest | json:4 }}</pre>
+  </div>
+</div>
+<script>
+
+angular.module('ExampleApp', ['angular-md5'])
+.controller('ExampleController', ['$scope', '$http', 'md5',
+  function($scope, $http, md5) {
+
+    $scope.UserSID = '';
+    authenticate('admin', 'admin');
+
+    function authenticate(user, password) {
+      var PasswordHash = md5.createHash(md5.createHash(md5.createHash(password).toUpperCase() + 'F593B01C562548C6B7A31B30884BDE53').toUpperCase()).toUpperCase();
+      // PasswordHash == '88020F057FE7287D8D57494382356F97'
+      $scope.authenticateRequest = {UserName: user, PasswordHash: PasswordHash};
+      $http.post('http://localhost:40001/json/Authenticate', $scope.authenticateRequest)
+           .then(function(response) {
+             $scope.authenticateResponse = response.data;
+             $scope.UserSID = response.data.UserSID;
+             if ($scope.UserSID != '') {
+               logout();
+             }
+           },
+           function(response) {
+             $scope.authenticateResponse = 'Authentication error';
+           });
+    }
+    function logout() {
+      $scope.logoutRequest = {UserSID: $scope.UserSID};
+      $http.post("http://localhost:40001/json/Logout", $scope.logoutRequest);
+    }
+  }]);
+
+</script>
+
+</body>
+</html>
+

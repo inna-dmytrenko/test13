@@ -1,0 +1,221 @@
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  /*
+   * CSS image reference example.
+   */
+  background-image: url('./images/body-background.jpg');
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+}
+
+.search-form {
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 0px solid red;
+  -webkit-box-shadow: 0px 0px 58px 2px rgba(255,255,255,1);
+  -moz-box-shadow: 0px 0px 58px 2px rgba(255,255,255,1);
+  box-shadow: 0px 0px 58px 2px rgba(255,255,255,1);
+}
+
+.photo-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+input {
+  font-size: 36px;
+  background-image: url('./images/body-background.jpg');
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  color: peru;
+}
+
+span {
+  padding-left: 7px;
+  margin-bottom: 8px;
+}
+
+.gallery {
+  margin-top: 32px;
+  display: grid;
+  width: 1400px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-auto-rows: 200px;
+  grid-gap: 12px;
+  padding: 0;
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+.stats {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: rebeccapurple;
+}
+
+.stats-item {
+ padding-left: 15px;
+ margin-top: 3px;
+ margin-bottom: 10px;
+}
+
+.image-card {
+  width: 360px;
+  margin-right: 0;
+  position: relative;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.gallery__image:hover {
+  transform: scale(1.03);
+  cursor: zoom-in;
+  -webkit-box-shadow: 0px 0px 64px 8px rgba(255,148,255,1);
+  -moz-box-shadow: 0px 0px 64px 8px rgba(255,148,255,1);
+  box-shadow: 0px 0px 64px 8px rgba(255,148,255,1);
+}
+
+.gallery__image {
+  width: 300px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 200ms ease-in-out;
+}
+
+/* MODAL WINDOW */
+
+.lightbox__overlay {
+  margin-right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1);
+}
+
+.lightbox__button {
+  position: absolute;
+  top: 10px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out;
+  outline: none;
+  background-image: url('./images/icon.svg');
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.lightbox__button:hover,
+  .lightbox__button:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+.modal-img {
+  visibility: visible;
+  height: fit-content;
+}
+
+/* LOAD MORE BUTTON */
+
+.button-wrapper {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.add-more {
+  visibility: hidden;
+  background:rgba(238, 238, 238, 0.247);
+  color:peru;
+  text-decoration:none;
+  display:block;
+  width:90px;
+  text-align:center;
+  margin:10px auto;
+  padding:10px 10px;
+  transition:all 0.3s;
+  border: 2px solid rgba(255,148,255,.5);
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+}
+
+.add-more:hover {
+  box-shadow:0px -5px 0 rgba(255,148,255,.5) inset;
+}
+
+.warning {
+  margin-top: 270px;
+  width: 270px;
+  text-align: center;
+  color: darkgoldenrod;
+  border-radius: 5px;
+  background-size: contain;
+  -webkit-box-shadow: 0px 0px 37px 6px rgb(250, 194, 9);
+  -moz-box-shadow: 0px 0px 37px 6px rgba(250, 194, 9);
+  box-shadow: 0px 0px 37px 6px rgba(250, 194, 9);
+}
+
+.sub {
+  background-color: grey;
+  border: none;
+  margin-top: 20px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+}
